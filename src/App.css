@@ -1,0 +1,64 @@
+#root {
+  padding: 2rem;
+  
+}
+
+.crowdfunder-container {
+  display:flex;
+  justify-content: space-between;
+  text-align: left;
+   
+}
+
+.crowdfunder-container > section {
+  
+  width:29%;
+  background: #111;
+/*     margin: 10px 20px; */
+  padding:10px 20px;
+  border-radius:3px;
+}
+
+.crowdfunder-container h4 {
+  font-size:1.175rem;
+  
+  margin-bottom: .5rem;
+  
+}
+.crowdfunder-container hr {
+  margin-bottom: 1.25rem;
+}
+
+
+
+#root .CSSConfig {
+  
+  text-align: left;
+  padding: 15px 10px;
+  
+}
+#root .CSSConfig form > label  {     
+  display: block;
+  
+}
+.CSSConfig input[type=text] {
+  display: inline-block !important; 
+}
+
+.CSSConfig fieldset {
+  padding:5px !important;
+  justify-content: flex-start !important;
+  margin:15px 0 0 0;
+  border:0;
+}
+.CSSConfig fieldset label{
+  display: block;
+}
+.CSSConfig fieldset input {
+  margin-left:-1px;
+}
+
+#root .CSSOutput  {
+  text-align: left !important;
+}
+
