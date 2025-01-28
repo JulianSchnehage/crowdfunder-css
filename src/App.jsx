@@ -7,37 +7,21 @@ import Crowdfunder from "./components/Crowdfunder.jsx";
 
 
 function App() {
-  // The useEffect hook below grabs the number of elements from the crowdfunder widget in the event we dynamically set up the widget in future
-  const [widgetElements, setWidgetElements] = useState([]);
-  
-  useEffect(()=> {
-    const widgetContainer = document.querySelector('.crowdfunder-widget');
-    if (widgetContainer) {
-      const children = Array.from(widgetContainer.children).map((child) => {
-        return {
-          tag: child.tagName.toLowerCase(),
-          text: child.textContent.trim()
-        }
-      })
-      setWidgetElements(children);
-    } 
-  }, []);
-
 
   // Store shared data in the parent component to be changed in CSSConfig and displayed to the user for copying in the CSSOutput component
   const [CSSCode, setCSSCode] = useState({
-    color: "rgba(0,0,255,1)", 
-    backgroundColor:"rgba(0,247,249,1)",
-    bodyFontSize:"1rem",
-    headingFontSize:"1.4rem",
-    hideElements:""
+    color: "rgba(0,0,0,1)", 
+    backgroundColor:"rgba(255,255,255,1)",
+    bodyFontSize: "16px" ,
+    headingFontSize:"24px",
+    hideElements:[]
   });
 
 
   return (
     <>
       <main className='crowdfunder-container'>
-        <CSSConfig CSSCode={CSSCode} setCSSCode={setCSSCode} elements={widgetElements} />
+        <CSSConfig CSSCode={CSSCode} setCSSCode={setCSSCode}  />
         <CSSOutput CSSCode={CSSCode}/>
         <Crowdfunder CSSCode={CSSCode} /> 
       </main>

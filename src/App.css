@@ -1,18 +1,22 @@
 #root {
   padding: 2rem;
-  
+  width:100%;
 }
 
 .crowdfunder-container {
   display:flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   text-align: left;
-   
+  width:100%;
 }
 
 .crowdfunder-container > section {
+  flex: 1 1 320px;
   
-  width:29%;
+  
+  margin: 20px 20px;
+
   background: #111;
 /*     margin: 10px 20px; */
   padding:10px 20px;
@@ -62,3 +66,54 @@
   text-align: left !important;
 }
 
+
+
+.crowdfunder-container .react-colorful {
+  height: 125px;
+  width:125px;
+}
+
+
+
+.font-color-picker,
+.background-color-picker,
+.heading-font,
+.body-font {
+    display: inline-block;
+    width:45% !important; 
+    overflow: hidden;
+}
+.heading-font input,
+.body-font input {
+    max-width:100px;
+}
+.font-color-picker label,
+.background-color-picker label,
+.heading-font label,
+.body-font label {
+    line-height:1;
+    margin-bottom: .25em;
+    white-space:nowrap;
+}
+
+.font-color-picker input,
+.background-color-picker input {
+    display: inline-block;
+    max-width: 80px;    
+}
+
+@media (max-width:769px) {
+  #root {
+    padding:0;
+  }
+  section.CSSConfig {
+    order:2; 
+  }
+  section.crowdfunder {
+    order:1;
+  }
+  .CSSOutput {
+    order:3;
+  }
+
+}
