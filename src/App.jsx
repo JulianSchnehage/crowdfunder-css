@@ -25,15 +25,21 @@ function App() {
 
 
   // Store shared data in the parent component to be changed in CSSConfig and displayed to the user for copying in the CSSOutput component
-  const [CSSCode, setCSSCode] = useState({});
+  const [CSSCode, setCSSCode] = useState({
+    color: "rgba(0,0,255,1)", 
+    backgroundColor:"rgba(0,247,249,1)",
+    bodyFontSize:"1rem",
+    headingFontSize:"1.4rem",
+    hideElements:""
+  });
 
 
   return (
     <>
       <main className='crowdfunder-container'>
-        <CSSConfig elements={widgetElements} CSSCode={CSSCode} setCSSCode={setCSSCode}/>
+        <CSSConfig CSSCode={CSSCode} setCSSCode={setCSSCode} elements={widgetElements} />
         <CSSOutput CSSCode={CSSCode}/>
-        <Crowdfunder /> 
+        <Crowdfunder CSSCode={CSSCode} /> 
       </main>
     </>
   )

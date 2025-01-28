@@ -1,19 +1,21 @@
-let generatedCode = `.crowdfunder-container {
-    display:flex;
-    justify-content: space-between
+export default function CSSOutput({ CSSCode: {color, backgroundColor, headingFontSize, bodyFontSize, hideElements} }){
+    let hideElementCode = hideElements ? `${hideElements} {display:none;}`: "";
+    let generatedCode = `
+.crowdfunder-widget * {
+    color:${color} !important;
+}     
+.crowdfunder-widget {
+    background-color:${backgroundColor};
 }
-
-.CSSConfig {
-    border:1px solid #e7e7e7;
-    max-width: 300px;
+.crowdfunder-widget .cf-bignumber {
+    font-size:${headingFontSize};
 }
-
-.CSSOutput {
-    border:1px solid #e7e7e7;
+.crowdfunder-widget p {
+    font-size:${bodyFontSize};    
 }
+${hideElementCode}
 `
 
-export default function CSSOutput(){
     return (
         <section className="CSSOutput">
             <h4>Copy the code:</h4>

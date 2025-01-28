@@ -1,9 +1,30 @@
 import React from 'react';
 
 
-export default function Crowdfunder(){
+//export default function Crowdfunder({ color, backgroundColor, bodyFontSize, headingFontSize, hideElements }){
+export default function Crowdfunder({ CSSCode: {color, backgroundColor, headingFontSize, bodyFontSize, hideElements} }){
+    let hideElementCode = hideElements ? `${hideElements} {display:none;}`: "";
+    let generatedCodePreview = `
+.crowdfunder-widget {
+    background-color:${backgroundColor};
+}
+.crowdfunder-widget * {
+    color:${color} !important;
+}     
+.crowdfunder-widget .cf-bignumber {
+    font-size:${headingFontSize};
+}
+.crowdfunder-widget p {
+    font-size:${bodyFontSize};    
+}
+${hideElementCode}
+`
     return (
-        <section class="crowdfunder">
+        <>
+        <style>
+            {generatedCodePreview}
+        </style>
+        <section className="crowdfunder">
         <h4>Preview:</h4>
         <hr/>
         <section className="crowdfunder-widget">
@@ -55,6 +76,7 @@ export default function Crowdfunder(){
             remaining
             </p>
         </section>
-        </section>        
+        </section>
+        </>        
     )
 }
