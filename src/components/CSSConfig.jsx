@@ -134,6 +134,7 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
                 htmlFor={`${el.tag}:nth-child(${index + 1})`}
               >
                 <input
+                  id={`${el.tag}:nth-child(${index + 1})`}
                   value={`.crowdfunder-widget ${el.tag}:nth-child(${index + 1})`}
                   type="checkbox"
                   name="hiddenElements"
