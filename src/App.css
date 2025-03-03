@@ -1,4 +1,9 @@
+body {
+	background-color:#242424;
+}
+
 #root {
+  background-color:#242424;
   padding: 2rem;
   width:100%;
 }
