@@ -14,7 +14,14 @@ function App() {
     backgroundColor:"rgba(255,255,255,1)",
     bodyFontSize: "16px" ,
     headingFontSize:"24px",
-    hideElements:[]
+    hideElements:[],
+    
+    progressBarHeight:"20px", 
+    progressBarBorderColor: "#333",
+    progressBarBorderRadius: "20px", 
+    progressBarHideBorder: false,
+    progressBarBackgroundColor:"#e7e7e7", 
+    progressBarInnerColor: "#FF0000"
   });
 
 

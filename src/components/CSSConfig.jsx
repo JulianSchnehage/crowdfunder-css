@@ -144,6 +144,67 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
               </label>
             ))}
           </fieldset>
+
+          
+          progressBarHeight,
+          <fieldset className="body-font">
+            <label htmlFor="body-font">Set small text size</label>
+            <input
+              onChange={handleBodyFontSize }
+              type="number"
+              name="bodyFont"
+              placeholder="16"
+              min="10"
+              value={`${bodyFontSize}`}
+            />
+          </fieldset>
+          
+          progressBarBorderRadius
+          <fieldset className="body-font">
+            <label htmlFor="body-font">Set small text size</label>
+            <input
+              onChange={handleBodyFontSize }
+              type="number"
+              name="bodyFont"
+              placeholder="16"
+              min="10"
+              value={`${bodyFontSize}`}
+            />
+          </fieldset> 
+          
+              <label
+                htmlFor="progress-bar-border"
+              >
+                <input
+                  id="progress-bar-border"
+                  value="false"
+                  type="checkbox"
+                  name="hiddenElements"
+                  onChange={handleProgressBarHideBorder }
+                />
+                Hide progress bar border?
+              </label>
+          </fieldset>
+
+          
+          <fieldset className="background-color-picker">
+            <label htmlFor="background-color">Progres bar border color</label>
+            <HexColorPicker color={backgroundColor} onChange={handleProgressBarBorderColor} />
+            <HexColorInput color={backgroundColor} onChange={handleProgressBarBorderColor} />
+          </fieldset>
+          
+          <fieldset className="prgoress-bar-background-color-picker">
+            <label htmlFor="prgoress-bar-background-color">Progress Bar Background color</label>
+            <HexColorPicker color={progressBarBackgroundColor} onChange={handleProgressBarBackgroundColor} />
+            <HexColorInput color={progressBarBackgroundColor} onChange={handleProgressBarBackgroundColor} />
+          </fieldset>
+          
+          <fieldset className="progress-bar-inner-color-picker">
+            <label htmlFor="progress-bar-inner-color">Progress bar innner color</label>
+            <HexColorPicker color={progressBarInnerColor} onChange={handleProgressBarInnerColor} />
+            <HexColorInput color={progressBarInnerColor} onChange={handleProgressBarInnerColor} />
+          </fieldset>
+          
         </form>
       </section>
     </>

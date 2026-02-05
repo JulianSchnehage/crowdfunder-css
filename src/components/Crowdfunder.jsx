@@ -5,8 +5,12 @@ import React from 'react';
 export default function Crowdfunder({ CSSCode: {color, backgroundColor, headingFontSize, bodyFontSize, hideElements} }){
     
     let hideElementCode = hideElements ? `${hideElements} {display:none;}`: "";
-    let generatedCodePreview = `
+    let generatedCodePreview = ` 
+:root {
+    --progress-bar-border-radius: 15px;
+}
 .crowdfunder-widget {
+
     background-color:${backgroundColor};
 }
 .crowdfunder-widget * {
@@ -19,6 +23,25 @@ export default function Crowdfunder({ CSSCode: {color, backgroundColor, headingF
 .crowdfunder-widget .cf-meter-label {
     font-size:${bodyFontSize}px !important;    
 }
+   
+
+.crowdfunder-widget .cf-meter {
+/* Progress bar height*/
+    height:8px;
+/* Progress bar border color*/
+    border-color:#333;
+/* Progress bar border-radius - match inner bar*/
+    border-radius:var(--progress-bar-border-radius);
+/* Progres bar border true/false */
+    border: 0 !important;
+/* Progress bar border true/false */
+    background-color: #e7e7e7;
+}
+
+.crowdfunder-widget .cf-meter .cf-percent-bar {
+    border-radius:var(--progress-bar-border-radius);
+}
+
 ${hideElementCode}
 `
     return (
