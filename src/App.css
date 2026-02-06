@@ -72,6 +72,41 @@ body {
   text-align: left !important;
 }
 
+.CSSOutput .css-output-header {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.copy-button {
+  background: #2b6cb0;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.copy-button:active,
+.copy-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66,153,225,0.35);
+}
+
+.CSSOutput pre {
+  background: #0b0b0b;
+  padding: 12px;
+  border-radius: 4px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.CSSOutput code {
+  color: #e6e6e6;
+  display: block;
+}
+
 
 
 .crowdfunder-container .react-colorful {
