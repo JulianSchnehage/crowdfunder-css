@@ -49,7 +49,7 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
   }
 
   // Progress bar controls
-  const [progressBarHeight, setProgressBarHeight] = useState(10);
+  const [progressBarHeight, setProgressBarHeight] = useState(24);
   const handleProgressBarHeight = (e) => {
     setProgressBarHeight(e.target.value);
     setCSSCode((prevData) => ({ ...prevData, progressBarHeight: e.target.value }));
@@ -80,7 +80,7 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
     setCSSCode((prevData) => ({ ...prevData, progressBarBackgroundColor: newColor }));
   };
 
-  const [progressBarInnerColor, setProgressBarInnerColor] = useState("#007bff");
+  const [progressBarInnerColor, setProgressBarInnerColor] = useState("#ff0000");
   const handleProgressBarInnerColor = (newColor) => {
     setProgressBarInnerColor(newColor);
     setCSSCode((prevData) => ({ ...prevData, progressBarInnerColor: newColor }));
