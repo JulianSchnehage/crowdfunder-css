@@ -48,6 +48,44 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
     });
   }
 
+  // Progress bar controls
+  const [progressBarHeight, setProgressBarHeight] = useState(10);
+  const handleProgressBarHeight = (e) => {
+    setProgressBarHeight(e.target.value);
+    setCSSCode((prevData) => ({ ...prevData, progressBarHeight: e.target.value }));
+  };
+
+  const [progressBarBorderRadius, setProgressBarBorderRadius] = useState(4);
+  const handleProgressBarBorderRadius = (e) => {
+    setProgressBarBorderRadius(e.target.value);
+    setCSSCode((prevData) => ({ ...prevData, progressBarBorderRadius: e.target.value }));
+  };
+
+  const [progressBarHideBorder, setProgressBarHideBorder] = useState(false);
+  const handleProgressBarHideBorder = (e) => {
+    const checked = e.target.checked;
+    setProgressBarHideBorder(checked);
+    setCSSCode((prevData) => ({ ...prevData, progressBarHideBorder: checked }));
+  };
+
+  const [progressBarBorderColor, setProgressBarBorderColor] = useState("#cccccc");
+  const handleProgressBarBorderColor = (newColor) => {
+    setProgressBarBorderColor(newColor);
+    setCSSCode((prevData) => ({ ...prevData, progressBarBorderColor: newColor }));
+  };
+
+  const [progressBarBackgroundColor, setProgressBarBackgroundColor] = useState("#e7e7e7");
+  const handleProgressBarBackgroundColor = (newColor) => {
+    setProgressBarBackgroundColor(newColor);
+    setCSSCode((prevData) => ({ ...prevData, progressBarBackgroundColor: newColor }));
+  };
+
+  const [progressBarInnerColor, setProgressBarInnerColor] = useState("#007bff");
+  const handleProgressBarInnerColor = (newColor) => {
+    setProgressBarInnerColor(newColor);
+    setCSSCode((prevData) => ({ ...prevData, progressBarInnerColor: newColor }));
+  };
+
   // Hiding elements
   const [widgetElements, setWidgetElements] = useState([]);
 
@@ -145,62 +183,45 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
             ))}
           </fieldset>
 
-          
-          progressBarHeight,
-          <fieldset className="body-font">
-            <label htmlFor="body-font">Set small text size</label>
+          <fieldset className="progress-bar-settings">
+            <legend>Progress Bar</legend>
+            <label htmlFor="progress-bar-height">Height</label>
             <input
-              onChange={handleBodyFontSize }
+              id="progress-bar-height"
               type="number"
-              name="bodyFont"
-              placeholder="16"
-              min="10"
-              value={`${bodyFontSize}`}
+              min="0"
+              value={progressBarHeight}
+              onChange={handleProgressBarHeight}
             />
-          </fieldset>
-          
-          progressBarBorderRadius
-          <fieldset className="body-font">
-            <label htmlFor="body-font">Set small text size</label>
-            <input
-              onChange={handleBodyFontSize }
-              type="number"
-              name="bodyFont"
-              placeholder="16"
-              min="10"
-              value={`${bodyFontSize}`}
-            />
-          </fieldset> 
-          
-              <label
-                htmlFor="progress-bar-border"
-              >
-                <input
-                  id="progress-bar-border"
-                  value="false"
-                  type="checkbox"
-                  name="hiddenElements"
-                  onChange={handleProgressBarHideBorder }
-                />
-                Hide progress bar border?
-              </label>
-          </fieldset>
 
-          
-          <fieldset className="background-color-picker">
-            <label htmlFor="background-color">Progres bar border color</label>
-            <HexColorPicker color={backgroundColor} onChange={handleProgressBarBorderColor} />
-            <HexColorInput color={backgroundColor} onChange={handleProgressBarBorderColor} />
-          </fieldset>
-          
-          <fieldset className="prgoress-bar-background-color-picker">
-            <label htmlFor="prgoress-bar-background-color">Progress Bar Background color</label>
+            <label htmlFor="progress-bar-radius">Border radius</label>
+            <input
+              id="progress-bar-radius"
+              type="number"
+              min="0"
+              value={progressBarBorderRadius}
+              onChange={handleProgressBarBorderRadius}
+            />
+
+            <label htmlFor="progress-bar-border">
+              <input
+                id="progress-bar-border"
+                type="checkbox"
+                checked={progressBarHideBorder}
+                onChange={handleProgressBarHideBorder}
+              />
+              Hide progress bar border?
+            </label>
+
+            <label>Border color</label>
+            <HexColorPicker color={progressBarBorderColor} onChange={handleProgressBarBorderColor} />
+            <HexColorInput color={progressBarBorderColor} onChange={handleProgressBarBorderColor} />
+
+            <label>Background color</label>
             <HexColorPicker color={progressBarBackgroundColor} onChange={handleProgressBarBackgroundColor} />
             <HexColorInput color={progressBarBackgroundColor} onChange={handleProgressBarBackgroundColor} />
-          </fieldset>
-          
-          <fieldset className="progress-bar-inner-color-picker">
-            <label htmlFor="progress-bar-inner-color">Progress bar innner color</label>
+
+            <label>Inner color</label>
             <HexColorPicker color={progressBarInnerColor} onChange={handleProgressBarInnerColor} />
             <HexColorInput color={progressBarInnerColor} onChange={handleProgressBarInnerColor} />
           </fieldset>
