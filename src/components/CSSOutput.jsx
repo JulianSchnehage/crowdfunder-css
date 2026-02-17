@@ -15,16 +15,22 @@ export default function CSSOutput({
         progressBarInnerColor,
     } 
 }){
-    
+    const asPx = (val) => {
+        if (val === undefined || val === null) return '';
+        if (typeof val === 'number') return `${val}px`;
+        const s = String(val).trim();
+        return s.endsWith('px') ? s : `${s}px`;
+    };
+
     const [copied, setCopied] = useState(false);
 
-    hideElements = hideElements.join(",\n")
+    hideElements = (hideElements || []).join(",\n")
     let hideElementCode = hideElements.length !== 0 
     ?`${hideElements} {
     display:none;
 }`
     : "";
-    let progressBarBorderBoolean = progressBarHideBorder? "0" : "inherit";
+    let progressBarBorderBoolean = progressBarHideBorder ? "0" : `1px solid ${progressBarBorderColor}`;
     let generatedCode = `
 .crowdfunder-widget {
     background-color:${backgroundColor};
@@ -33,22 +39,21 @@ export default function CSSOutput({
     color:${color} !important;
 }     
 .crowdfunder-widget .cf-bignumber {
-    font-size:${headingFontSize}px !important;
+    font-size:${asPx(headingFontSize)} !important;
 }
 .crowdfunder-widget p, 
 .crowdfunder-widget .cf-meter-label {
-    font-size:${bodyFontSize}px !important;    
+    font-size:${asPx(bodyFontSize)} !important;    
 }
 .crowdfunder-widget .cf-meter {
-    height:${progressBarHeight}px;
-    border-color:${progressBarBorderColor};
-    border-radius:${progressBarBorderRadius}px;
-    border: ${ progressBarBorderBoolean }!important;
+    height:${asPx(progressBarHeight)};
+    border-radius:${asPx(progressBarBorderRadius)};
+    border: ${progressBarBorderBoolean}!important;
     background-color: ${progressBarBackgroundColor};
     
 }  
 .crowdfunder-widget .cf-meter .cf-percent-bar {
-    border-radius:${progressBarBorderRadius}px;
+    border-radius:${asPx(progressBarBorderRadius)};
     /* Progress bar inner color*/
     background-color:${progressBarInnerColor} !important;
 }

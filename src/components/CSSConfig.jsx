@@ -89,6 +89,20 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
   // Hiding elements
   const [widgetElements, setWidgetElements] = useState([]);
 
+  // Collapsible sections state
+  const [expandedSections, setExpandedSections] = useState({
+    styles: true,
+    hideElements: false,
+    progressBar: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
+
   // The useEffect hook below grabs the number of elements from the crowdfunder widget in the event we dynamically set up the widget in future
   useEffect(()=> {
     const widgetContainer = document.querySelector('.crowdfunder-widget');
@@ -125,8 +139,11 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
   return ( 
     <>
       <section className="CSSConfig">
-        <h4>Adjust styles here:</h4>
+        <h4 onClick={() => toggleSection('styles')} style={{ cursor: 'pointer', userSelect: 'none' }}>
+          {expandedSections.styles ? '▼' : '▶'} Adjust styles here
+        </h4>
         <hr />
+        {expandedSections.styles && (
         <form className="css-config-form">
           <fieldset className="font-color-picker">
             <label htmlFor="color">Text color</label>
@@ -163,9 +180,15 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
               value={`${bodyFontSize}`}
             />
           </fieldset>
+        </form>
+        )}
 
+        <h4 onClick={() => toggleSection('hideElements')} style={{ cursor: 'pointer', userSelect: 'none', marginTop: '1.5rem' }}>
+          {expandedSections.hideElements ? '▼' : '▶'} Hide Elements
+        </h4>
+        {expandedSections.hideElements && (
+        <form className="css-config-form">
           <fieldset>
-            <legend>Hide Elements:</legend>
             {widgetElements.map((el, index) => (
               <label
                 key={index}
@@ -182,9 +205,15 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
               </label>
             ))}
           </fieldset>
+        </form>
+        )}
 
+        <h4 onClick={() => toggleSection('progressBar')} style={{ cursor: 'pointer', userSelect: 'none', marginTop: '1.5rem' }}>
+          {expandedSections.progressBar ? '▼' : '▶'} Progress Bar
+        </h4>
+        {expandedSections.progressBar && (
+        <form className="css-config-form">
           <fieldset className="progress-bar-settings">
-            <legend>Progress Bar</legend>
             <label htmlFor="progress-bar-height">Height</label>
             <input
               id="progress-bar-height"
@@ -225,8 +254,8 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
             <HexColorPicker color={progressBarInnerColor} onChange={handleProgressBarInnerColor} />
             <HexColorInput color={progressBarInnerColor} onChange={handleProgressBarInnerColor} />
           </fieldset>
-          
         </form>
+        )}
       </section>
     </>
   );

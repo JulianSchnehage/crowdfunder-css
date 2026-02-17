@@ -2,9 +2,16 @@ import React from 'react';
 
 
 //export default function Crowdfunder({ color, backgroundColor, bodyFontSize, headingFontSize, hideElements }){
-export default function Crowdfunder({ CSSCode: {color, backgroundColor, headingFontSize, bodyFontSize, hideElements} }){
+export default function Crowdfunder({ CSSCode: {color, backgroundColor, headingFontSize, bodyFontSize, hideElements, progressBarHeight, progressBarBorderColor, progressBarBorderRadius, progressBarHideBorder, progressBarBackgroundColor, progressBarInnerColor} }){
     
-    let hideElementCode = hideElements ? `${hideElements} {display:none;}`: "";
+    const asPx = (val) => {
+        if (val === undefined || val === null) return '';
+        if (typeof val === 'number') return `${val}px`;
+        const s = String(val).trim();
+        return s.endsWith('px') ? s : `${s}px`;
+    };
+
+    let hideElementCode = (hideElements || []).length ? `${(hideElements || []).join(",\n")} {\n    display:none;\n}` : "";
     let generatedCodePreview = ` 
 :root {
     --progress-bar-border-radius: 15px;
@@ -17,29 +24,28 @@ export default function Crowdfunder({ CSSCode: {color, backgroundColor, headingF
     color:${color} !important;
 }     
 .crowdfunder-widget .cf-bignumber {
-    font-size:${headingFontSize}px !important;
+    font-size:${asPx(headingFontSize)} !important;
 }
 .crowdfunder-widget p, 
 .crowdfunder-widget .cf-meter-label {
-    font-size:${bodyFontSize}px !important;    
+    font-size:${asPx(bodyFontSize)} !important;    
 }
    
 
 .crowdfunder-widget .cf-meter {
 /* Progress bar height*/
-    height:8px;
-/* Progress bar border color*/
-    border-color:#333;
+    height:${asPx(progressBarHeight)};
 /* Progress bar border-radius - match inner bar*/
-    border-radius:var(--progress-bar-border-radius);
-/* Progres bar border true/false */
-    border: 0 !important;
+    border-radius:${asPx(progressBarBorderRadius)};
 /* Progress bar border true/false */
-    background-color: #e7e7e7;
+    border: ${progressBarHideBorder ? '0' : `1px solid ${progressBarBorderColor}`} !important;
+/* Progress bar background */
+    background-color: ${progressBarBackgroundColor};
 }
 
 .crowdfunder-widget .cf-meter .cf-percent-bar {
-    border-radius:var(--progress-bar-border-radius);
+    border-radius:${asPx(progressBarBorderRadius)};
+    background-color:${progressBarInnerColor} !important;
 }
 
 ${hideElementCode}

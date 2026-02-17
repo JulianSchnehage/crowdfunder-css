@@ -10,15 +10,15 @@ function App() {
 
   // Store shared data in the parent component to be changed in CSSConfig and displayed to the user for copying in the CSSOutput component
   const [CSSCode, setCSSCode] = useState({
-    color: "rgba(0,0,0,1)", 
-    backgroundColor:"rgba(255,255,255,1)",
-    bodyFontSize: "16px" ,
-    headingFontSize:"24px",
+    color: "rgba(0,0,0,1)",
+    backgroundColor: "rgba(255,255,255,1)",
+    bodyFontSize: 16,
+    headingFontSize: 24,
     hideElements:[],
     
-    progressBarHeight:"20px", 
+    progressBarHeight: 20,
     progressBarBorderColor: "#333",
-    progressBarBorderRadius: "20px", 
+    progressBarBorderRadius: 20,
     progressBarHideBorder: false,
     progressBarBackgroundColor:"#e7e7e7", 
     progressBarInnerColor: "#FF0000"
