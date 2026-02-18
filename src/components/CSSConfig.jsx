@@ -48,8 +48,60 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
     });
   }
 
+  // Progress bar controls
+  const [progressBarHeight, setProgressBarHeight] = useState(24);
+  const handleProgressBarHeight = (e) => {
+    setProgressBarHeight(e.target.value);
+    setCSSCode((prevData) => ({ ...prevData, progressBarHeight: e.target.value }));
+  };
+
+  const [progressBarBorderRadius, setProgressBarBorderRadius] = useState(4);
+  const handleProgressBarBorderRadius = (e) => {
+    setProgressBarBorderRadius(e.target.value);
+    setCSSCode((prevData) => ({ ...prevData, progressBarBorderRadius: e.target.value }));
+  };
+
+  const [progressBarHideBorder, setProgressBarHideBorder] = useState(false);
+  const handleProgressBarHideBorder = (e) => {
+    const checked = e.target.checked;
+    setProgressBarHideBorder(checked);
+    setCSSCode((prevData) => ({ ...prevData, progressBarHideBorder: checked }));
+  };
+
+  const [progressBarBorderColor, setProgressBarBorderColor] = useState("#cccccc");
+  const handleProgressBarBorderColor = (newColor) => {
+    setProgressBarBorderColor(newColor);
+    setCSSCode((prevData) => ({ ...prevData, progressBarBorderColor: newColor }));
+  };
+
+  const [progressBarBackgroundColor, setProgressBarBackgroundColor] = useState("#e7e7e7");
+  const handleProgressBarBackgroundColor = (newColor) => {
+    setProgressBarBackgroundColor(newColor);
+    setCSSCode((prevData) => ({ ...prevData, progressBarBackgroundColor: newColor }));
+  };
+
+  const [progressBarInnerColor, setProgressBarInnerColor] = useState("#ff0000");
+  const handleProgressBarInnerColor = (newColor) => {
+    setProgressBarInnerColor(newColor);
+    setCSSCode((prevData) => ({ ...prevData, progressBarInnerColor: newColor }));
+  };
+
   // Hiding elements
   const [widgetElements, setWidgetElements] = useState([]);
+
+  // Collapsible sections state
+  const [expandedSections, setExpandedSections] = useState({
+    styles: true,
+    hideElements: false,
+    progressBar: false
+  });
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   // The useEffect hook below grabs the number of elements from the crowdfunder widget in the event we dynamically set up the widget in future
   useEffect(()=> {
@@ -87,8 +139,11 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
   return ( 
     <>
       <section className="CSSConfig">
-        <h4>Adjust styles here:</h4>
+        <h4 onClick={() => toggleSection('styles')} style={{ cursor: 'pointer', userSelect: 'none' }}>
+          {expandedSections.styles ? '▼' : '▶'} Adjust styles here
+        </h4>
         <hr />
+        {expandedSections.styles && (
         <form className="css-config-form">
           <fieldset className="font-color-picker">
             <label htmlFor="color">Text color</label>
@@ -125,9 +180,15 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
               value={`${bodyFontSize}`}
             />
           </fieldset>
+        </form>
+        )}
 
+        <h4 onClick={() => toggleSection('hideElements')} style={{ cursor: 'pointer', userSelect: 'none', marginTop: '1.5rem' }}>
+          {expandedSections.hideElements ? '▼' : '▶'} Hide Elements
+        </h4>
+        {expandedSections.hideElements && (
+        <form className="css-config-form">
           <fieldset>
-            <legend>Hide Elements:</legend>
             {widgetElements.map((el, index) => (
               <label
                 key={index}
@@ -145,6 +206,56 @@ export default function CSSConfig({ elements, CSSCode, setCSSCode }) {
             ))}
           </fieldset>
         </form>
+        )}
+
+        <h4 onClick={() => toggleSection('progressBar')} style={{ cursor: 'pointer', userSelect: 'none', marginTop: '1.5rem' }}>
+          {expandedSections.progressBar ? '▼' : '▶'} Progress Bar
+        </h4>
+        {expandedSections.progressBar && (
+        <form className="css-config-form">
+          <fieldset className="progress-bar-settings">
+            <label htmlFor="progress-bar-height">Height</label>
+            <input
+              id="progress-bar-height"
+              type="number"
+              min="0"
+              value={progressBarHeight}
+              onChange={handleProgressBarHeight}
+            />
+
+            <label htmlFor="progress-bar-radius">Border radius</label>
+            <input
+              id="progress-bar-radius"
+              type="number"
+              min="0"
+              value={progressBarBorderRadius}
+              onChange={handleProgressBarBorderRadius}
+            />
+
+            <label htmlFor="progress-bar-border">
+              <input
+                id="progress-bar-border"
+                type="checkbox"
+                checked={progressBarHideBorder}
+                onChange={handleProgressBarHideBorder}
+              />
+              Hide progress bar border?
+            </label>
+
+            <label>Border color</label>
+            <HexColorPicker color={progressBarBorderColor} onChange={handleProgressBarBorderColor} />
+            <HexColorInput color={progressBarBorderColor} onChange={handleProgressBarBorderColor} />
+
+            <label>Background color</label>
+            <HexColorPicker color={progressBarBackgroundColor} onChange={handleProgressBarBackgroundColor} />
+            <HexColorInput color={progressBarBackgroundColor} onChange={handleProgressBarBackgroundColor} />
+
+            <label>Inner color</label>
+            <HexColorPicker color={progressBarInnerColor} onChange={handleProgressBarInnerColor} />
+            <HexColorInput color={progressBarInnerColor} onChange={handleProgressBarInnerColor} />
+          </fieldset>
+        </form>
+        )}
       </section>
     </>
   );
