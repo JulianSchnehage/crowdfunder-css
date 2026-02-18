@@ -14,7 +14,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { Copy, Check, SprayCan, Layout, ExternalLink } from 'lucide-react';
+import { Copy, Check, PaintRoller , Layout, ExternalLink } from 'lucide-react';
 import { WidgetSettings, ElementStyle, SettingKey } from './types';
 import { INITIAL_SETTINGS } from './constants';
 import SettingsPanel from './components/SettingsPanel';
@@ -40,17 +40,14 @@ const App: React.FC = () => {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
-    console.log('Drag ended:', { active: active.id, over: over?.id });
     if (over && active.id !== over.id) {
       const oldIndex = elementIds.indexOf(active.id as SettingKey);
       const newIndex = elementIds.indexOf(over.id as SettingKey);
       const newOrderIds = arrayMove(elementIds, oldIndex, newIndex);
-      console.log('Moving from', oldIndex, 'to', newIndex, 'newOrder:', newOrderIds);
       const updatedSettings = { ...settings };
       newOrderIds.forEach((id, index) => { 
         updatedSettings[id as SettingKey] = { ...updatedSettings[id as SettingKey], order: index };
       });
-      console.log('Updated settings:', updatedSettings);
       setSettings(updatedSettings);
     }
   };
@@ -71,11 +68,7 @@ const App: React.FC = () => {
     };
     
     const hasAnyChange = (Object.keys(settings) as SettingKey[]).some(checkChange);
-    console.log('hasAnyChange:', hasAnyChange);
-    if (!hasAnyChange) {
-      console.log('No changes detected, returning empty CSS');
-      return "";
-    }
+    if (!hasAnyChange) return "";
 
     let css = "";
     const shortHex = (h: string) => h && h.length === 7 && h[1] === h[2] && h[3] === h[4] && h[5] === h[6] ? `#${h[1]}${h[3]}${h[5]}` : h;
@@ -85,7 +78,6 @@ const App: React.FC = () => {
     const anyOrderChanged = (Object.keys(settings) as SettingKey[])
       .filter(k => k !== 'container' && k !== 'meterBar')
       .some(k => settings[k].order !== INITIAL_SETTINGS[k].order);
-    console.log('anyOrderChanged:', anyOrderChanged);
 
     (Object.entries(settings) as [SettingKey, ElementStyle][]).forEach(([key, style]) => {
       const initial = INITIAL_SETTINGS[key];
@@ -157,7 +149,7 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <header className="bg-white border-b px-6 py-4 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center gap-2">
-          <div className="p-2 bg-indigo-600 rounded-lg"><SprayCan className="text-white w-5 h-5" /></div>
+          <div className="p-2 bg-indigo-600 rounded-lg"><PaintRoller className="text-white w-5 h-5" /></div>
           <h1 className="text-xl font-bold text-gray-900">Crowdfunder Styling Helper</h1>
         </div>
         
