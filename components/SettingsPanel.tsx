@@ -83,8 +83,8 @@ const SortableItem: React.FC<SortableItemProps> = ({ id, style, updateSetting })
       <div className="flex items-center justify-between px-3 py-2 bg-gray-50 border-b border-gray-100">
         <div className="flex items-center gap-1">
           <button 
-            {...attributes} 
-            {...listeners} 
+            {...attributes}
+            {...listeners}
             className="cursor-grab text-black hover:text-indigo-600 p-1 bg-gray-300 rounded"
             title="Drag to reorder"
           >

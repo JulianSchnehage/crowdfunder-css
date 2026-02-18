@@ -40,14 +40,17 @@ const App: React.FC = () => {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
+    console.log('Drag ended:', { active: active.id, over: over?.id });
     if (over && active.id !== over.id) {
       const oldIndex = elementIds.indexOf(active.id as SettingKey);
       const newIndex = elementIds.indexOf(over.id as SettingKey);
       const newOrderIds = arrayMove(elementIds, oldIndex, newIndex);
+      console.log('Moving from', oldIndex, 'to', newIndex, 'newOrder:', newOrderIds);
       const updatedSettings = { ...settings };
       newOrderIds.forEach((id, index) => { 
-        updatedSettings[id as SettingKey].order = index; 
+        updatedSettings[id as SettingKey] = { ...updatedSettings[id as SettingKey], order: index };
       });
+      console.log('Updated settings:', updatedSettings);
       setSettings(updatedSettings);
     }
   };
@@ -61,12 +64,18 @@ const App: React.FC = () => {
       const s = settings[k], i = INITIAL_SETTINGS[k];
       return s.visible !== i.visible || s.color !== i.color || s.backgroundColor !== i.backgroundColor || 
              s.fontSize !== i.fontSize || s.height !== i.height || s.borderRadius !== i.borderRadius || 
-             s.padding !== i.padding || s.marginBottom !== i.marginBottom || s.gap !== i.gap || 
-             s.order !== i.order || s.useGradient !== i.useGradient || s.isTemperatureThemed !== i.isTemperatureThemed;
+             s.padding !== i.padding || s.margin !== i.margin || s.marginBottom !== i.marginBottom || s.gap !== i.gap || 
+             s.order !== i.order || s.useGradient !== i.useGradient || s.isTemperatureThemed !== i.isTemperatureThemed ||
+             s.borderColor !== i.borderColor || s.borderWidth !== i.borderWidth ||
+             s.gradientFrom !== i.gradientFrom || s.gradientTo !== i.gradientTo;
     };
     
     const hasAnyChange = (Object.keys(settings) as SettingKey[]).some(checkChange);
-    if (!hasAnyChange) return "";
+    console.log('hasAnyChange:', hasAnyChange);
+    if (!hasAnyChange) {
+      console.log('No changes detected, returning empty CSS');
+      return "";
+    }
 
     let css = "";
     const shortHex = (h: string) => h && h.length === 7 && h[1] === h[2] && h[3] === h[4] && h[5] === h[6] ? `#${h[1]}${h[3]}${h[5]}` : h;
@@ -76,6 +85,7 @@ const App: React.FC = () => {
     const anyOrderChanged = (Object.keys(settings) as SettingKey[])
       .filter(k => k !== 'container' && k !== 'meterBar')
       .some(k => settings[k].order !== INITIAL_SETTINGS[k].order);
+    console.log('anyOrderChanged:', anyOrderChanged);
 
     (Object.entries(settings) as [SettingKey, ElementStyle][]).forEach(([key, style]) => {
       const initial = INITIAL_SETTINGS[key];
