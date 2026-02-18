@@ -87,7 +87,7 @@ export const INITIAL_SETTINGS: WidgetSettings = {
 };
 
 export const BASE_CSS = `
-.crowdfunder-widget { padding: 4%; background-color: #f7f7f9; color: #333; margin-bottom:20px; clear: both; }
+.crowdfunder-widget { display: flex; flex-direction: column; gap: 15px; padding: 4%; background-color: #f7f7f9; color: #333; margin-bottom:20px; clear: both; }
 .crowdfunder-widget span.cf-bignumber { font-size: 2.6rem; line-height: .9em; display: block; color: #353442; }
 .crowdfunder-widget .cf-meter { height: 24px; width: 100%; position: relative; background-color: #fff; overflow: hidden; border: 1px solid #e5e5e7; border-radius: 4px; }
 .crowdfunder-widget .cf-meter span { display: block; height: 100%; background-color: #ff0000; position: absolute; top: 0; left: 0; overflow: hidden; border-radius: 0 3px 3px 0; }

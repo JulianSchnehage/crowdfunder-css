@@ -14,7 +14,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { Copy, Check, Palette, Layout, ExternalLink } from 'lucide-react';
+import { Copy, Check, SprayCan, Layout, ExternalLink } from 'lucide-react';
 import { WidgetSettings, ElementStyle, SettingKey } from './types';
 import { INITIAL_SETTINGS } from './constants';
 import SettingsPanel from './components/SettingsPanel';
@@ -157,8 +157,8 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <header className="bg-white border-b px-6 py-4 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center gap-2">
-          <div className="p-2 bg-indigo-600 rounded-lg"><Palette className="text-white w-5 h-5" /></div>
-          <h1 className="text-xl font-bold text-gray-900">Stylist AI</h1>
+          <div className="p-2 bg-indigo-600 rounded-lg"><SprayCan className="text-white w-5 h-5" /></div>
+          <h1 className="text-xl font-bold text-gray-900">Crowdfunder Styling Helper</h1>
         </div>
         
         <div className="flex items-center gap-6">
