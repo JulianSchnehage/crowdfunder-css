@@ -324,16 +324,6 @@ const StyleControls: React.FC<{
       </div>
 
       <div className="flex gap-2">
-        {style.borderRadius !== undefined && (
-          <div className="flex-1">
-            <NumericInput 
-              label="Border Radius"
-              value={style.borderRadius}
-              onChange={(v) => onChange({ borderRadius: v })}
-              placeholder="e.g. 8px"
-            />
-          </div>
-        )}
         {style.padding !== undefined && (
           <div className="flex-1">
             <label className="block text-[10px] font-bold text-gray-500 mb-1 uppercase">Padding</label>
@@ -400,6 +390,16 @@ const StyleControls: React.FC<{
                 onChange={(v) => onChange({ borderWidth: v })}
                 placeholder="Width"
               />
+              </div>
+              <div className="flex items-center gap-2">
+              {style.borderRadius !== undefined && (
+                <NumericInput
+                  label="Border Radius"
+                  value={style.borderRadius}
+                  onChange={(v) => onChange({ borderRadius: v })}
+                  placeholder="Radius"
+                />
+              )}
             </div>
           </div>
         </div>

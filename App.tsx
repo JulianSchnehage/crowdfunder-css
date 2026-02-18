@@ -91,6 +91,8 @@ const App: React.FC = () => {
         rules.push('display:flex', 'flex-direction:column', `gap:${style.gap}`);
         if (changed('padding')) rules.push(`padding:${style.padding}`);
         if (changed('backgroundColor')) rules.push(`background-color:${shortHex(style.backgroundColor!)}`);
+        if (changed('borderColor') || changed('borderWidth')) rules.push(`border:${style.borderWidth || '1px'} solid ${shortHex(style.borderColor || '#ccc')}`);
+        if (changed('borderRadius')) rules.push(`border-radius:${style.borderRadius}`);
         if (changed('margin')) rules.push(`margin:${style.margin}`);
         if (changed('visible') && !style.visible) rules.push('display:none');
         
