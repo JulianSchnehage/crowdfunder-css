@@ -24,7 +24,7 @@ const CodeDisplay: React.FC<CodeDisplayProps> = ({ css }) => {
             <p className="font-semibold mb-1">Character Limit Warning</p>
             <p>Your CSS exceeds Shopify's custom CSS character limit (500 chars). To use this CSS:</p>
             <ul className="list-disc list-inside mt-1 space-y-0.5">
-              <li>Add it to a custom Liquid element on your page</li>
+              <li>Add it to a custom Liquid element on your page, wrap the CSS code in a &lt;style&gt;&lt;/style&gt; tag</li>
               <li>Add it directly to your theme's CSS file</li>
             </ul>
           </div>

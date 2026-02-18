@@ -175,8 +175,8 @@ const App: React.FC = () => {
 
       <main className="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-hidden h-[calc(100vh-73px)]">
         {/* Settings Column */}
-        <div className="lg:col-span-3 border-r bg-white overflow-y-auto custom-scrollbar">
-          <div className="p-6">
+        <div className="lg:col-span-3 border-r bg-white relative">
+          <div className="p-6 h-[calc(100vh-73px)] overflow-auto custom-scrollbar">
             <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6 flex items-center gap-2">
               <Layout size={16} /> Configuration
             </h2>
@@ -207,8 +207,8 @@ const App: React.FC = () => {
         </div>
 
         {/* Preview Column (Sticky wrapper) */}
-        <div className="lg:col-span-5 bg-slate-100 overflow-y-auto custom-scrollbar relative">
-          <div className="sticky top-0 p-8 flex justify-center w-full min-h-full">
+        <div className="lg:col-span-5 bg-slate-100 relative">
+          <div className="lg:sticky lg:top-0 p-8 flex justify-center w-full min-h-full">
             <div className="w-full max-w-md h-fit">
               <PreviewArea settings={settings} css={generatedCSS} goalMode={goalMode} />
             </div>
